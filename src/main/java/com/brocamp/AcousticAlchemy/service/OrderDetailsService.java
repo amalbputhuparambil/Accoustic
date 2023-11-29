@@ -1,0 +1,50 @@
+package com.brocamp.AcousticAlchemy.service;
+
+import com.brocamp.AcousticAlchemy.dto.OrderDetailsDTO;
+import com.brocamp.AcousticAlchemy.dto.OrderdetailPaginationDto;
+import com.brocamp.AcousticAlchemy.model.OrderDetails;
+import com.brocamp.AcousticAlchemy.model.Users;
+import com.razorpay.RazorpayException;
+
+import java.util.List;
+
+public interface OrderDetailsService {
+    OrderDetails save(OrderDetailsDTO orderDetailsDTO, Users users) throws RazorpayException;
+
+
+    List<OrderDetails> findAllByUsersId(long usersId);
+
+    List<OrderDetailsDTO> findAllOrderDetailsProductsByUsersId(long id);
+
+    boolean existsById(long id);
+
+    void cancelOrder(long orderDetailsId);
+
+    void deliverOrder(long id);
+
+    List<OrderDetailsDTO> findAllOrderDetails();
+
+    OrderDetails findById(long id);
+
+    OrderdetailPaginationDto findAllPaginatedOrderDetails(int pageNo, int pageSize);
+
+
+    double findTotalDeliveredCODRevenue();
+
+
+    long findTotalOrdersByOrderStatus(String orderStatus);
+
+    Double findMonthlyDeliveredCODRevenue();
+
+    long findAppliedCoupon(long couponId, long usersId);
+
+    List<Object[]> getMonthlySaleChartDetails();
+
+    void savePaymentMethods(OrderDetails orderDetails);
+
+    void checkOnlineOrdersPayments(long id);
+
+    void returnCustomerOrder(long id);
+
+    void returnResponse(long id,long userId);
+}
